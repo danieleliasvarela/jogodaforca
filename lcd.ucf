@@ -1,6 +1,5 @@
 NET "LCD_DB[0]" LOC = Y13;
 
-# PlanAhead Generated physical constraints 
 
 NET "CLK" LOC = E12;
 NET "LCD_DB[1]" LOC = AB18;
@@ -13,4 +12,19 @@ NET "LCD_DB[7]" LOC = Y15;
 NET "OE" LOC = AB4;
 NET "RS" LOC = Y14;
 NET "RW" LOC = W13;
-NET "rst" LOC = T15;
+NET "RST" LOC = T15;
+
+
+NET "PS2C" LOC = W12;
+NET "PS2D" LOC = V11;
+
+# PlanAhead Generated physical constraints 
+
+NET "LEDS[7]" LOC = W21;
+NET "LEDS[6]" LOC = Y22;
+NET "LEDS[5]" LOC = V20;
+NET "LEDS[4]" LOC = V19;
+NET "LEDS[3]" LOC = U19;
+NET "LEDS[2]" LOC = U20;
+NET "LEDS[1]" LOC = T19;
+NET "LEDS[0]" LOC = R20;

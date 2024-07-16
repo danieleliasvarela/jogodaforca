@@ -1,7 +1,6 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
-
 --=======================================================
 -- ENTIDADE
 --=======================================================
@@ -20,7 +19,6 @@ END KB_CODE;
 --=======================================================
 ARCHITECTURE ARCH OF KB_CODE IS
    CONSTANT BRK: STD_LOGIC_VECTOR(7 DOWNTO 0):="11110000";
-   -- F0 (BREAK CODE)
    TYPE STATETYPE IS (WAIT_BRK, GET_CODE);
    SIGNAL STATE_REG, STATE_NEXT: STATETYPE;
    SIGNAL SCAN_OUT, W_DATA: STD_LOGIC_VECTOR(7 DOWNTO 0);
@@ -66,11 +64,11 @@ BEGIN
       GOT_CODE_TICK <='0';
       STATE_NEXT <= STATE_REG;
       CASE STATE_REG IS
-         WHEN WAIT_BRK => -- WAIT FOR F0 OF BREAK CODE
+         WHEN WAIT_BRK =>
             IF SCAN_DONE_TICK='1' AND SCAN_OUT=BRK THEN
                STATE_NEXT <= GET_CODE;
             END IF;
-         WHEN GET_CODE => -- GET THE FOLLOWING SCAN CODE
+         WHEN GET_CODE =>
             IF SCAN_DONE_TICK='1' THEN
                GOT_CODE_TICK <='1';
                STATE_NEXT <= WAIT_BRK;

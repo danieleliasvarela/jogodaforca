@@ -1,6 +1,9 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
+--=================================================
+-- ENTIDADE
+--=================================================
 ENTITY PS2_RX IS
    PORT (
       CLK, RESET: IN  STD_LOGIC;
@@ -10,7 +13,9 @@ ENTITY PS2_RX IS
       DOUT: OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
    );
 END PS2_RX;
-
+--=================================================
+-- ARQUITETURA
+--=================================================
 ARCHITECTURE ARCH OF PS2_RX IS
    TYPE STATETYPE IS (IDLE, DPS, LOAD);
    SIGNAL STATE_REG, STATE_NEXT: STATETYPE;
@@ -21,9 +26,9 @@ ARCHITECTURE ARCH OF PS2_RX IS
    SIGNAL N_REG,N_NEXT: UNSIGNED(3 DOWNTO 0);
    SIGNAL FALL_EDGE: STD_LOGIC;
 BEGIN
-   --=================================================
-   -- FILTER AND FALLING EDGE TICK GENERATION FOR PS2C
-   --=================================================
+--=================================================
+-- GERAÇÃO DE FILTRO E FALLING EDGE TICK PARA PS2C
+--=================================================
    PROCESS (CLK, RESET)
    BEGIN
       IF RESET='1' THEN
@@ -41,10 +46,9 @@ BEGIN
                   F_PS2C_REG;
    FALL_EDGE <= F_PS2C_REG AND (NOT F_PS2C_NEXT);
 
-   --=================================================
-   -- FSMD TO EXTRACT THE 8-BIT DATA
-   --=================================================
-   -- REGISTERS
+--=================================================
+-- EXTRAIR OS DADOS DE 8 BITS
+--=================================================
    PROCESS (CLK, RESET)
    BEGIN
       IF RESET='1' THEN
