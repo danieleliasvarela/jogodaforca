@@ -48,7 +48,7 @@ BEGIN
 					FULL=>OPEN,
                R_DATA=>KEY_CODE);
 --=======================================================
--- FSM TO GET THE SCAN CODE AFTER F0 RECEIVED
+-- MAQUINA DE ESTADOS E SEUS PERIODOS
 --=======================================================
    PROCESS (CLK, RESET)
    BEGIN
