@@ -27,7 +27,7 @@ ARCHITECTURE ARCH OF PS2_RX IS
    SIGNAL FALL_EDGE: STD_LOGIC;
 BEGIN
 --=================================================
--- GERA«√O DE FILTRO E FALLING EDGE TICK PARA PS2C
+-- GERA√á√ÉO DE FILTRO E FALLING EDGE TICK PARA PS2C
 --=================================================
    PROCESS (CLK, RESET)
    BEGIN
@@ -61,7 +61,7 @@ BEGIN
          B_REG <= B_NEXT;
       END IF;
    END PROCESS;
-   -- NEXT-STATE LOGIC
+   -- LOGICA PARA O PROXIMO ESTADO
    PROCESS(STATE_REG,N_REG,B_REG,FALL_EDGE,RX_EN,PS2D)
    BEGIN
       RX_DONE_TICK <='0';
@@ -71,12 +71,12 @@ BEGIN
       CASE STATE_REG IS
          WHEN IDLE =>
             IF FALL_EDGE='1' AND RX_EN='1' THEN
-               -- SHIFT IN START BIT
+               -- DESLOCAMENTO NO BIT DE INICIO
                B_NEXT <= PS2D & B_REG(10 DOWNTO 1);
                N_NEXT <= "1001";
                STATE_NEXT <= DPS;
             END IF;
-         WHEN DPS =>  -- 8 DATA + 1 PAIRTY + 1 STOP
+         WHEN DPS => 
             IF FALL_EDGE='1' THEN
             B_NEXT <= PS2D & B_REG(10 DOWNTO 1);
                IF N_REG = 0 THEN
@@ -86,11 +86,11 @@ BEGIN
                END IF;
             END IF;
          WHEN LOAD =>
-            -- 1 EXTRA CLOCK TO COMPLETE THE LAST SHIFT
+            -- CLOCK EXTRA PRA COMPLETAR DESLOCAMENTO
             STATE_NEXT <= IDLE;
             RX_DONE_TICK <='1';
       END CASE;
    END PROCESS;
    -- OUTPUT
-   DOUT <= B_REG(8 DOWNTO 1); -- DATA BITS
+   DOUT <= B_REG(8 DOWNTO 1); -- BITS DE DADOS
 END ARCH;
